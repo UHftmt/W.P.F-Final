@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider, createRoutesFromElements, Route } 
 import Home from './pages/Home.jsx'
 import Cart from './pages/Cart.jsx'
 import Checkout from './pages/Checkout.jsx'
+import ProductDetail from './pages/ProductDetails.jsx'
 import Error from './pages/Error.jsx'
 
 //layout
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path='cart' element={<Cart />} />
       <Route path='checkout' element={<Checkout />} />
+      <Route path='product/:id' element={<ProductDetail />} />
       <Route path='*' element={<Error />} />
     </Route>
   ),
