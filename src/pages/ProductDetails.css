@@ -1,0 +1,52 @@
+.ProductPics {
+    display: flex;
+    align-items: top;
+    justify-content: center;
+}
+
+.Productdisplay {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ProductPics {
+    width: 1200px;
+    height: auto;
+}
+
+.Left-bar {
+    display: grid;
+    grid-template-columns: 200px;
+    grid-template-rows: repeat(4, 200px);
+    gap: 10px;
+    margin: 0px 10px;
+    border-radius: 10px;
+}
+
+.Right-screen .BigBeautifulPic{
+    width: 1000px;
+    height: 1000px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.ProductDetailImage {
+    border: 1px solid skyblue;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.ProductDetails {
+    border: 1px solid black;
+    width: 1200px;
+    text-align: left;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.info {
+    margin: 10px;
+}
