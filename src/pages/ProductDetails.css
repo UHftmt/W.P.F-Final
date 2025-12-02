@@ -12,7 +12,7 @@
 }
 
 .ProductPics {
-    width: 1200px;
+    width: 1000px;
     height: auto;
 }
 
@@ -26,27 +26,36 @@
 }
 
 .Right-screen .BigBeautifulPic{
-    width: 1000px;
-    height: 1000px;
-    border: 1px solid black;
+    width: 900px;
+    height: 900px;
     border-radius: 10px;
 }
 
 .ProductDetailImage {
-    border: 1px solid skyblue;
     width: 200px;
     height: 200px;
     border-radius: 10px;
 }
 
 .ProductDetails {
-    border: 1px solid black;
-    width: 1200px;
+    width: 1100px;
     text-align: left;
     margin-top: 20px;
     border-radius: 10px;
+    box-shadow: 1px 1px 10px grey;
+    padding: 10px;
 }
 
 .info {
     margin: 10px;
+}
+
+.add-button {
+    color: aliceblue;
+    background-color: rgb(0, 110, 255);
+    border-radius: 5px;
+    border: none;
+    width: 90px;
+    height: 30px;
+    margin-left: 10px;
 }

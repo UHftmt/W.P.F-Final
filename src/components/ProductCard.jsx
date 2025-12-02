@@ -8,9 +8,10 @@ export default function ProductCard({name, price, url}) {
                 <img src={url} alt="product picture" />
             </Link>
             <div className="product-info">
-                <p>{name}</p>
-                <p>{price}</p>
+                <p><strong>{name}</strong></p>
+                <p className='price'>{price}</p>
             </div>
+            <button className='add-button'>Add to Cart</button>
         </div>
     )
 }
