@@ -3,24 +3,25 @@ import './Home.css'
 import ProductCard from "../components/ProductCard";
 
 export default function Home() {
-    const [page, setPage] = useState(2)
+    const [page, setPage] = useState(3)
     const [data, setData] = useState({ products: [], moreProducts: true })
     const [loading, setLoading] = useState(false)
-    const [checker, SetChecker] = useState(false)
     const url = `https://huitian.serv00.net/project/?type=list&batchNumber=${page}`;
 
     // init Load
     useEffect (() => {
         setLoading(true);
         async function initFetch() {
-            const initPage = 'https://huitian.serv00.net/project/?type=list&batchNumber=1';
             try {
-                const initFetch = await fetch(initPage);
-                const initData = await initFetch.json();
+                const promise1 = fetch('https://huitian.serv00.net/project/?type=list&batchNumber=1');
+                const promise2 = fetch('https://huitian.serv00.net/project/?type=list&batchNumber=2');
+                const [initFetch1, initFetch2] = await Promise.all([promise1, promise2]);
+                const initData1 = await initFetch1.json();
+                const initData2 = await initFetch2.json();
 
                 setData({
-                    products: initData.products,
-                    moreProducts: initData.moreProducts
+                    products: [...initData1.products, ...initData2.products],
+                    moreProducts: initData2.moreProducts
                 });
             } catch (error) {
                 console.log("Uncessful init lodaing.")
@@ -33,8 +34,8 @@ export default function Home() {
 
     // load more
     useEffect (() => {
+        setLoading(true);
         async function Fetchdata(url) {
-            setLoading(true);
             try {
                 const response = await fetch(url);
                 const data = await response.json();
@@ -43,8 +44,6 @@ export default function Home() {
                     products: [...prevData.products, ...data.products],
                     moreProducts: data.moreProducts
                 }));
-                SetChecker(true)
-                console.log(checker)
             } catch (error) {
                 console.error("Data Fetch Error!");
             } finally {
@@ -54,7 +53,7 @@ export default function Home() {
         Fetchdata(url);
     }, [page])
 
-    if (!checker) {
+    if (loading) {
         return (
             <div className="loading-message">
                 Contenting is Loading...
