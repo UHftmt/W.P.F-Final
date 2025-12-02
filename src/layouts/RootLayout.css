@@ -2,5 +2,33 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: black;
 }
 
+.header-text {
+    font-size: large;
+    font-weight: 600;
+    color: aliceblue;
+}
+
+.left {
+    margin-left: 20px;
+}
+
+.right {
+    margin-right: 20px;
+}
+
+.NavLink {
+    margin-left: 10px;
+}
+
+footer {
+    background-color: black;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.footer-text {
+    color: aliceblue;
+}
