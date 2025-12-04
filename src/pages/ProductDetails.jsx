@@ -31,7 +31,6 @@ export default function ProductDetail() {
 
     return (
         <div className="Productdisplay">
-            <p>Here is the detail for { id } </p>
             <div className="ProductPics">
                 <div className="Left-bar">
                    {detail?.imageUrls?.map((url, index) => (
@@ -45,7 +44,7 @@ export default function ProductDetail() {
             <div className="ProductDetails">
                 <h1 className="info">Product ID: {detail.ProductId}</h1>
                 <p className="info"><strong>Price:</strong>{detail.price}</p>
-                <button>Add to Chart</button>
+                <button className="add-button">Add to Chart</button>
                 <p className="info"><strong>Description:</strong> {detail.shortDescription}</p>
                 <p className="info"><strong>Screen Size:</strong> {detail.screenSize}</p>
                 <p className="info"><strong>Weight:</strong> {detail.weight}</p>

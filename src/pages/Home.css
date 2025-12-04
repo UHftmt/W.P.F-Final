@@ -1,0 +1,13 @@
+.load-button {
+    color: aliceblue;
+    background-color: green;
+    border-radius: 5px;
+    border: none;
+    width: 150px;
+    height: 35px;
+    margin: 30px auto;
+}
+
+.ProductsDisplay {
+    min-height: 80vh;
+}
