@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import "./ProductDetails.css"
 
-export default function ProductDetail() {
+export default function ProductDetail({AddToCart}) {
     const { id } = useParams();
     const [detail, setDetail] = useState(null);
     const [activatedIndex, setActivatedIndex] = useState(0);
@@ -42,9 +42,9 @@ export default function ProductDetail() {
                 </div>
             </div>
             <div className="ProductDetails">
-                <h1 className="info">Product ID: {detail.ProductId}</h1>
+                <h1 className="info">Product ID: { id }</h1>
                 <p className="info"><strong>Price:</strong>{detail.price}</p>
-                <button className="add-button">Add to Chart</button>
+                <button className="add-button" onClick={() => AddToCart}>Add to Chart</button>
                 <p className="info"><strong>Description:</strong> {detail.shortDescription}</p>
                 <p className="info"><strong>Screen Size:</strong> {detail.screenSize}</p>
                 <p className="info"><strong>Weight:</strong> {detail.weight}</p>
