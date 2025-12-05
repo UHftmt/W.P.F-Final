@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { useCart } from "./Cart.jsx";
 import "./ProductDetails.css"
 
 export default function ProductDetail({AddToCart}) {
     const { id } = useParams();
     const [detail, setDetail] = useState(null);
     const [activatedIndex, setActivatedIndex] = useState(0);
+    const { addToCart } = useCart();
 
     useEffect(() => {
         async function FetchDetail(ProductId) {
@@ -29,6 +30,15 @@ export default function ProductDetail({AddToCart}) {
         )
     };
 
+    const handleAddToCart = () => {
+      addToCart({
+        productId: id,
+        name: detail.name,
+        price: detail.price,
+        image: detail.imageUrls?.[0] || "",
+      });
+    };
+
     return (
         <div className="Productdisplay">
             <div className="ProductPics">
@@ -44,7 +54,7 @@ export default function ProductDetail({AddToCart}) {
             <div className="ProductDetails">
                 <h1 className="info">Product ID: { id }</h1>
                 <p className="info"><strong>Price:</strong>{detail.price}</p>
-                <button className="add-button" onClick={() => AddToCart}>Add to Chart</button>
+                <button className="add-button" onClick={handleAddToCart}>Add to Cart</button>
                 <p className="info"><strong>Description:</strong> {detail.shortDescription}</p>
                 <p className="info"><strong>Screen Size:</strong> {detail.screenSize}</p>
                 <p className="info"><strong>Weight:</strong> {detail.weight}</p>

@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react"
-import './Home.css'
+import { useEffect, useState } from "react";
+import "./Home.css";
 import ProductCard from "../components/ProductCard";
+import { useCart } from "./Cart";
 
 export default function Home() {
-    const [page, setPage] = useState(3)
-    const [data, setData] = useState({ products: [], moreProducts: true })
-    const [loading, setLoading] = useState(false)
-    const url = `https://huitian.serv00.net/project/?type=list&batchNumber=${page}`;
+  const [page, setPage] = useState(3);
+  const [data, setData] = useState({ products: [], moreProducts: true });
+  const [loading, setLoading] = useState(false);
+  const { addToCart } = useCart();   // <-- get addToCart here
+  const url = `https://huitian.serv00.net/project/?type=list&batchNumber=${page}`;
 
     // init Load
     useEffect (() => {
@@ -49,12 +51,12 @@ export default function Home() {
         }
     };
 
-    if (loading) {
-        return (
-            <div className="loading-message">
-                Contenting is Loading...
-            </div>
-        )
+    if (loading && !data.products.length) {
+      return (
+        <div className="loading-message">
+          Contenting is Loading...
+        </div>
+      );
     }
 
     return (
@@ -67,13 +69,21 @@ export default function Home() {
                 gap: '20px',
             }}>
             {data?.products?.map((product, index) => (
-                    <ProductCard
+                <ProductCard
                     key={index}
                     name={product.productId}
                     url={product.imageUrl}
                     price={product.price}
-                    />
-                ))}
+                    onAddToCart={() =>
+                        addToCart({
+                            productId: product.productId,
+                            name: product.productId,        // or product.name if available
+                            price: product.price,
+                            image: product.imageUrl,
+                        })
+                    }
+                />
+            ))}
             </div>
             <button className="load-button" onClick={() => Fetchdata(url)} disabled={loading||!data?.moreProducts}>{loading? "Loading...": "Load More Products"}</button>
         </div>
