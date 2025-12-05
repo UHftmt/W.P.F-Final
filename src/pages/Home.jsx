@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
 import ProductCard from "../components/ProductCard";
-import { useCart } from "./Cart";
+import { CartDataHook } from "./CartData";
 
 export default function Home() {
   const [page, setPage] = useState(3);
   const [data, setData] = useState({ products: [], moreProducts: true });
   const [loading, setLoading] = useState(false);
-  const { addToCart } = useCart();   // <-- get addToCart here
+  const { addToCart } = CartDataHook();
   const url = `https://huitian.serv00.net/project/?type=list&batchNumber=${page}`;
 
     // init Load
@@ -60,14 +60,8 @@ export default function Home() {
     }
 
     return (
-        <div className="ProductsDisplay displayBoard">
-            <div className="products" style={{
-                display: 'grid',
-                justifyContent: 'center',
-                gridTemplateColumns: 'repeat(3, 400px)',
-                gridTemplateRows: 'repeat(auto-fill, minmax(300px, 1fr))',
-                gap: '20px',
-            }}>
+        <div className="ProductsDisplay">
+            <div className="products">
             {data?.products?.map((product, index) => (
                 <ProductCard
                     key={index}
@@ -77,7 +71,6 @@ export default function Home() {
                     onAddToCart={() =>
                         addToCart({
                             productId: product.productId,
-                            name: product.productId,        // or product.name if available
                             price: product.price,
                             image: product.imageUrl,
                         })

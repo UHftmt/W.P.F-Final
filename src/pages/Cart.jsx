@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import './Cart.css'
+import { CartDataHook } from './CartData';
+import CartCard from '../components/CartCard';
 
 const CART_STORAGE_KEY = 'shopping_cart';
 
@@ -67,7 +69,7 @@ export const useCart = () => {
   };
 
   // Remove product from cart
-  const removeFromCart = (productId) => {
+  const removeFromCarta = (productId) => {
     setCart(prevCart => prevCart.filter(item => item.productId !== productId));
   };
 
@@ -75,7 +77,7 @@ export const useCart = () => {
   const updateQuantity = (productId, quantity) => {
     const newQuantity = parseInt(quantity, 10);
     if (Number.isNaN(newQuantity) || newQuantity <= 0) {
-      removeFromCart(productId);
+      removeFromCarta(productId);
       return;
     }
 
@@ -106,162 +108,38 @@ export const useCart = () => {
 };
 
 export default function Cart() {
-  // 1. Destructure the necessary state and handlers from the integrated hook
-  const {
-    cart,
-    updateQuantity: onUpdateQuantity,
-    removeFromCart: onRemoveItem,
-    getTotalPrice
-  } = useCart();
-
-  const navigate = useNavigate();
-
-  // 2. Calculate total price once
-  const totalPrice = getTotalPrice();
+  const { cart } = CartDataHook();
 
   // 3. Empty cart state
-  if (cart.length === 0) {
+  if (!cart) {
     return (
       <div className="cart-page py-5">
-        <div className="container text-center">
-          <div className="empty-cart">
-            <h2 className="mb-4">Your cart is empty</h2>
-            <p className="text-muted mb-4">Start shopping to add items to your cart</p>
-            <Link to="/" className="btn btn-primary btn-lg">
-              Continue Shopping
-            </Link>
-          </div>
-        </div>
+        <h2 className="mb-4">Your cart is empty</h2>
+        <p className="text-muted mb-4">Start shopping to add items to your cart</p>
+        <Link to="/" className="btn btn-primary btn-lg">
+          Continue Shopping
+        </Link>
       </div>
     );
   }
 
   // 4. Cart with items state
   return (
-    <div className="cart-page py-5 displayBoard">
-      <div className="container">
-        <h1 className="mb-5">Shopping Cart</h1>
-
-        <div className="row">
-          {/* Cart Items */}
-          <div className="col-lg-8">
-            <div className="cart-items">
-              {cart.map(item => {
-                const price = normalizePrice(item.price);
-                const qty = Number(item.quantity) || 1;
-                const lineTotal = price * qty;
-
-                return (
-                  <div key={item.productId} className="cart-item card mb-3">
-                    <div className="card-body">
-                      <div className="row align-items-center">
-                        {/* Product Image */}
-                        <div className="col-md-2">
-                          <img
-                            src={item.image}
-                            alt={item.productId}
-                            className="img-fluid rounded"
-                          />
-                        </div>
-
-                        {/* Product Info */}
-                        <div className="col-md-4">
-                          <h5>{item.productId}</h5>
-                          <p className="text-muted small">{item.name}</p>
-                          <p className="fw-bold">
-                            Price: ${price.toLocaleString()}
-                          </p>
-                        </div>
-
-                        {/* Quantity Controls */}
-                        <div className="col-md-3">
-                          <div className="quantity-controls">
-                            <button
-                              className="btn btn-sm btn-outline-secondary"
-                              onClick={() => onUpdateQuantity(item.productId, qty - 1)}
-                              disabled={qty <= 1}
-                            >
-                              −
-                            </button>
-                            <span className="quantity-display mx-2">{qty}</span>
-                            <button
-                              className="btn btn-sm btn-outline-secondary"
-                              onClick={() => onUpdateQuantity(item.productId, qty + 1)}
-                            >
-                              +
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Total Price */}
-                        <div className="col-md-2 text-end">
-                          <p className="fw-bold text-success">
-                            ${lineTotal.toLocaleString()}
-                          </p>
-                        </div>
-
-                        {/* Remove Button */}
-                        <div className="col-md-1 text-end">
-                          <button
-                            className="btn btn-sm btn-danger"
-                            onClick={() => onRemoveItem(item.productId)}
-                          >
-                            🗑️
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Cart Summary */}
-          <div className="col-lg-4">
-            <div className="cart-summary card sticky-top">
-              <div className="card-body">
-                <h5 className="card-title mb-4">Order Summary</h5>
-
-                <div className="summary-item d-flex justify-content-between mb-3">
-                  <span>Subtotal ({cart.length} items):</span>
-                  <strong>${totalPrice.toLocaleString()}</strong>
-                </div>
-
-                <div className="summary-item d-flex justify-content-between mb-3">
-                  <span>Shipping:</span>
-                  <strong>$0.00</strong>
-                </div>
-
-                <div className="summary-item d-flex justify-content-between mb-3">
-                  <span>Tax:</span>
-                  <strong>${(totalPrice * 0.1).toFixed(2)}</strong>
-                </div>
-
-                <hr />
-
-                <div className="summary-item d-flex justify-content-between mb-4">
-                  <strong>Total:</strong>
-                  <strong className="text-success">
-                    ${(totalPrice * 1.1).toFixed(2)}
-                  </strong>
-                </div>
-
-                <button
-                  className="btn btn-success btn-lg w-100 mb-3"
-                  onClick={() => navigate('/checkout')}
-                >
-                  Proceed to Checkout
-                </button>
-
-                <Link to="/" className="btn btn-outline-secondary w-100">
-                  Continue Shopping
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="cart-page py-5">
+      <div>
+        {cart?.map((item, index) => (
+          <CartCard
+            key={index}
+            name={item.Id}
+            url={item.Image}
+            price={item.Price}
+            number={item.Number}
+          />
+        ))}
       </div>
+      <Link to="/" className="btn btn-primary btn-lg">
+        Continue Shopping
+      </Link>
     </div>
-  );
+  )
 }

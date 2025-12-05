@@ -20,3 +20,11 @@
     min-height: 80vh;
     padding: 30px;
 }
+
+.products {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 400px);
+    grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
