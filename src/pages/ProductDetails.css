@@ -1,0 +1,62 @@
+.ProductPics {
+    display: flex;
+    align-items: top;
+    justify-content: center;
+}
+
+.Productdisplay {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px;
+}
+
+.ProductPics {
+    width: 1000px;
+    height: auto;
+}
+
+.Left-bar {
+    display: grid;
+    grid-template-columns: 200px;
+    grid-template-rows: repeat(4, 200px);
+    gap: 10px;
+    margin: 0px 10px;
+    border-radius: 10px;
+}
+
+.Right-screen .BigBeautifulPic{
+    width: 900px;
+    height: 900px;
+    border-radius: 10px;
+}
+
+.ProductDetailImage {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+}
+
+.ProductDetails {
+    width: 1100px;
+    text-align: left;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px grey;
+    padding: 10px;
+}
+
+.info {
+    margin: 10px;
+}
+
+.add-button {
+    color: aliceblue;
+    background-color: rgb(0, 110, 255);
+    border-radius: 5px;
+    border: none;
+    width: 90px;
+    height: 30px;
+    margin-left: 10px;
+}
