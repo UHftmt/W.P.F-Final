@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import './ProductCard.css'
 
 export default function ProductCard({name, price, url, onAddToCart}) {
-    
+
     return (
         <div className="product-card">
             <Link to={`/product/${name}`}>

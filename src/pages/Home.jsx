@@ -35,25 +35,21 @@ export default function Home() {
     }, [])
 
     // load more
-    useEffect (() => {
-        setLoading(true);
-        async function Fetchdata(url) {
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                console.log(data)
-                setData(prevData => ({
-                    products: [...prevData.products, ...data.products],
-                    moreProducts: data.moreProducts
-                }));
-            } catch (error) {
-                console.error("Data Fetch Error!");
-            } finally {
-                setLoading(false)
-            }
+    async function Fetchdata(url) {
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data)
+            setData(prevData => ({
+                products: [...prevData.products, ...data.products],
+                moreProducts: data.moreProducts
+            }));
+        } catch (error) {
+            console.error("Data Fetch Error!");
+        } finally {
+            setPage(page + 1);
         }
-        Fetchdata(url);
-    }, [page])
+    };
 
     if (loading && !data.products.length) {
       return (
@@ -89,7 +85,7 @@ export default function Home() {
                 />
             ))}
             </div>
-            <button className="load-button" onClick={() => setPage(page + 1)} disabled={loading||!data?.moreProducts}>{loading? "Loading...": "Load More Products"}</button>
+            <button className="load-button" onClick={() => Fetchdata(url)} disabled={loading||!data?.moreProducts}>{loading? "Loading...": "Load More Products"}</button>
         </div>
     )
 }
