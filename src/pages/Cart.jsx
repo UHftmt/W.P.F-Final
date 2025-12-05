@@ -138,7 +138,7 @@ export default function Cart() {
 
   // 4. Cart with items state
   return (
-    <div className="cart-page py-5">
+    <div className="cart-page py-5 displayBoard">
       <div className="container">
         <h1 className="mb-5">Shopping Cart</h1>
 
