@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod'; 
 import './Checkout.css';
-import { useCart } from './Cart'; 
+import { useCart } from "./Cart.jsx";
 
 const userSchema = z.object({
+  
   // Personal Information
-  firstName: z.string().min(1, '* First name is required and must be at least 1 characters'),
-  lastName: z.string().min(1, '* Last name is required and must be at least 1 characters'),
+  firstName: z.string().min(1, '* First name is required'),
+  lastName: z.string().min(1, '* Last name is required'),
   email: z.string().email('* Invalid email address'),
   mobile: z.string().regex(/^\+?\d{10,15}$/, "* Invalid mobile number - must be 10-15 digits"),
   
   // Billing Address
-  billingStreet: z.string().min(1, '* Street address is required and must be at least 1 characters'),
-  billingCity: z.string().min(1, '* City name is required and must be at least 1 characters'),
+  billingStreet: z.string().min(1, '* Street address is required'),
+  billingCity: z.string().min(1, '* City name is required'),
   billingState: z.string().min(2, '* State name is required and must be at least 2 characters'),
   billingZipCode: z.string().regex(/^[0-9\-]*$/, '* Invalid Zip Code').min(1, '* Zip Code is required'),
   
@@ -22,8 +23,8 @@ const userSchema = z.object({
   sameAsBilling: z.boolean().default(false),
   
   // Delivery Address
-  deliveryStreet: z.string().min(1, '* Street address is required and must be at least 1 characters'),
-  deliveryCity: z.string().min(1, '* City name is required and must be at least 1 characters'),
+  deliveryStreet: z.string().min(1, '* Street address is required'),
+  deliveryCity: z.string().min(1, '* City name is required'),
   deliveryState: z.string().min(2, '* State name is required and must be at least 2 characters'),
   deliveryZipCode: z.string().regex(/^[0-9\-]*$/, '* Invalid Zip Code').min(1, '* Zip Code is required'),
   
@@ -37,7 +38,7 @@ const userSchema = z.object({
 })
 
 export default function Checkout() {
-  const {cart, clearCart } = useCart();
+  const { cart, clearCart } = useCart(); 
   const [showSuccess, setShowSuccess] = useState(false);
 
   const { register, handleSubmit, formState: {errors}, watch, reset, setValue } = useForm({
@@ -58,7 +59,7 @@ export default function Checkout() {
 
   const onSubmit = async (data) => {
     try {
-      console.log('Checkout Data:', data);
+      console.log("Checkout submitted with items:", cart.length)
       setShowSuccess(true);
       setTimeout(() => { clearCart(); reset(); }, 1000);
     } catch (e) {
@@ -66,15 +67,15 @@ export default function Checkout() {
     }
   };
 
-  if (showSuccess) return (<h1 className="pop-up pop-up-success" role="alert">🎉 Congratulations! 🎉<br/>Your order has been placed successfully.<br/>Thank you for shopping at MyShop!</h1>);
+  if (showSuccess) return (<h1 className="pop-up pop-up-success">🎉 Congratulations! 🎉<br/>Your order has been placed successfully.<br/>Thank you for shopping at MyShop!</h1>);
 
-  if (cart.length === 0) return (<h1 className="pop-up" role="alert">Your cart is empty. Please add items before checkout.</h1>);
+  if (!cart ||cart.length === 0) return (<h1 className="pop-up">Your cart is empty. Please add items before checkout!</h1>);
 
   return (
     <div className="checkout-page">
       <h1>Checkout</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-  
+    
           {/* Personal Information */}
           <div className="information-box">
             <div className="box-title"><h2>Personal Information</h2></div>

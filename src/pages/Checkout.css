@@ -1,6 +1,7 @@
 .pop-up {
-    margin: 400px auto;
-    font-weight: 400; 
+  margin: 400px auto;
+  font-weight: 500;
+  background-color: white;
 }
 
 .checkout-page {
@@ -9,6 +10,10 @@
   flex-direction: column;
   margin: auto;
   text-align: left;
+}
+
+h1 {
+  margin-left: 0px;
 }
 
 .information-box {
@@ -43,19 +48,21 @@
 
 .invalid-text {
   color: #dc3545;
-  font-size: 0.875rem;
+  font-size: 15px;
   margin-top: 0.25rem;
 }
 
 .submit-button {
   width: 750px;
-  background-color: black;
+  background-color: #222222;
   color: aliceblue;
   border-radius: 4px;
   padding: 8px;
   margin-bottom: 40px;
+  font-size: 15px;
 }
 
 .submit-button:hover {
-  background-color: #6100FF;
+  background-color: black;
+  color: white;
 }
