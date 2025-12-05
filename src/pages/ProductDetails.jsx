@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useCart } from "./Cart.jsx";
 import "./ProductDetails.css"
 
-export default function ProductDetail({AddToCart}) {
+export default function ProductDetail() {
     const { id } = useParams();
     const [detail, setDetail] = useState(null);
     const [activatedIndex, setActivatedIndex] = useState(0);
@@ -40,7 +40,7 @@ export default function ProductDetail({AddToCart}) {
     };
 
     return (
-        <div className="Productdisplay">
+        <div className="Productdisplay displayBoard">
             <div className="ProductPics">
                 <div className="Left-bar">
                    {detail?.imageUrls?.map((url, index) => (

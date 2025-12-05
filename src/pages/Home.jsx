@@ -60,7 +60,7 @@ export default function Home() {
     }
 
     return (
-        <div className="ProductsDisplay">
+        <div className="ProductsDisplay displayBoard">
             <div className="products" style={{
                 display: 'grid',
                 justifyContent: 'center',

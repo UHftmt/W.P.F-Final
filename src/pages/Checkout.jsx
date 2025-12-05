@@ -149,7 +149,7 @@ export default function Checkout() {
   const totalPrice = getTotalPrice()
 
   return (
-    <div className="checkout-page py-5">
+    <div className="checkout-page py-5 displayBoard">
       <div className="container">
         <h1 className="mb-5">Checkout</h1>
 

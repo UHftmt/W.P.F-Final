@@ -1,6 +1,6 @@
 .load-button {
     color: aliceblue;
-    background-color: green;
+    background-color: #1faa51;
     border-radius: 5px;
     border: none;
     width: 150px;
@@ -8,7 +8,15 @@
     margin: 30px auto;
 }
 
+.load-button:disabled {
+    background-color: grey;
+}
+
+.load-button:active {
+    background-color: darkgreen;
+}
+
 .ProductsDisplay {
     min-height: 80vh;
-    margin: 30px;
+    padding: 30px;
 }
