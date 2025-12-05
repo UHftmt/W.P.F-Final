@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "./Home.css";
 import ProductCard from "../components/ProductCard";
-import { CartDataHook } from "./CartData";
+import { useCart } from "./Cart.jsx";
 
 export default function Home() {
   const [page, setPage] = useState(3);
   const [data, setData] = useState({ products: [], moreProducts: true });
   const [loading, setLoading] = useState(false);
-  const { addToCart } = CartDataHook();
+  const { addToCart } = useCart();
   const url = `https://huitian.serv00.net/project/?type=list&batchNumber=${page}`;
 
     // init Load

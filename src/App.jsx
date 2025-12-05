@@ -14,17 +14,17 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
-      <Route path='cart' element={<Cart />} />
-      <Route path='checkout' element={<Checkout />} />
-      <Route path='product/:id' element={<ProductDetail />} />
-      <Route path='*' element={<Error />} />
+      <Route path="cart" element={<Cart />} />
+      <Route path="checkout" element={<Checkout />} />
+      <Route path="product/:id" element={<ProductDetail />} />
+      <Route path="*" element={<Error />} />
     </Route>
   ),
   { basename: import.meta.env.BASE_URL }
-)
+);
 
 function App() {
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
