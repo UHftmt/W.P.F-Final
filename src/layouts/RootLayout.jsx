@@ -13,7 +13,7 @@ export default function RootLayout() {
                 </nav>
             </header>
 
-            <main>
+            <main className="displayBoard">
                 <Outlet />
             </main>
 

@@ -2,13 +2,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: black;
+    background-color: #222222;
 }
 
 .header-text {
     font-size: large;
     font-weight: 600;
     color: aliceblue;
+    padding: 5px;
 }
 
 .left {
@@ -21,6 +22,14 @@ header {
 
 .NavLink {
     margin-left: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.NavLink.active {
+    border: 1px solid white;
+    border-radius: 10px;
 }
 
 footer {
