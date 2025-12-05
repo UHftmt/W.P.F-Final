@@ -73,9 +73,8 @@ export default function Checkout() {
   return (
     <div className="checkout-page">
       <h1>Checkout</h1>
-
         <form onSubmit={handleSubmit(onSubmit)}>
-    
+  
           {/* Personal Information */}
           <div className="information-box">
             <div className="box-title"><h2>Personal Information</h2></div>
