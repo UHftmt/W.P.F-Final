@@ -50,3 +50,7 @@
 .info {
     margin: 10px;
 }
+
+.Left-bar img:active {
+    border: 1px solid black;
+}
