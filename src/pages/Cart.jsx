@@ -114,7 +114,7 @@ export default function Cart() {
 
                         {/* Product Info */}
                         <div className="product-info">
-                          <h5>{item.productId}: {item.name}</h5>
+                          <p>Product ID: {item.productId}</p>
                           <p>Price: ${price.toLocaleString()}</p>
                         </div>
                       </div>

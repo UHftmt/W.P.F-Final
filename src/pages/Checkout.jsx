@@ -10,14 +10,14 @@ const userSchema = z.object({
   // Personal Information
   firstName: z.string().min(1, '* First name is required'),
   lastName: z.string().min(1, '* Last name is required'),
-  email: z.string().email('* Invalid email address'),
-  mobile: z.string().regex(/^\+?\d{10,15}$/, "* Invalid mobile number - must be 10-15 digits"),
+  email: z.string().min(1, '* Email is required').email('* Invalid email address'),
+  mobile: z.string().min(1, '* Mobile is required').regex(/^\+?\d{10,15}$/, "* Invalid mobile number - must be 10-15 digits"),
   
   // Billing Address
   billingStreet: z.string().min(1, '* Street address is required'),
   billingCity: z.string().min(1, '* City name is required'),
   billingState: z.string().min(2, '* State name is required and must be at least 2 characters'),
-  billingZipCode: z.string().regex(/^[0-9\-]*$/, '* Invalid Zip Code').min(1, '* Zip Code is required'),
+  billingZipCode: z.string().regex(/^[0-9\-]*$/, '* Invalid ZIP Code').min(1, '* ZIP Code is required'),
   
   // Same as Billing checkbox
   sameAsBilling: z.boolean().default(false),
@@ -26,7 +26,7 @@ const userSchema = z.object({
   deliveryStreet: z.string().min(1, '* Street address is required'),
   deliveryCity: z.string().min(1, '* City name is required'),
   deliveryState: z.string().min(2, '* State name is required and must be at least 2 characters'),
-  deliveryZipCode: z.string().regex(/^[0-9\-]*$/, '* Invalid Zip Code').min(1, '* Zip Code is required'),
+  deliveryZipCode: z.string().regex(/^[0-9\-]*$/, '* Invalid ZIP Code').min(1, '* ZIP Code is required'),
   
   // Credit Card
   cardNumber: z.string().regex(/^\d{16}$/, '* Card number is required and must be 16 digits'),
@@ -34,7 +34,7 @@ const userSchema = z.object({
   cvv: z.string().regex(/^\d{3}$/, '* CVV must be 3 digits'),
   
   // Terms and Conditions
-  termsAccepted: z.boolean().refine(val => val === true, '* You must accept the terms and conditions to continue'),
+  termsAccepted: z.boolean().refine(val => val === true, '* You must accept the terms and conditions to check out'),
 })
 
 export default function Checkout() {
@@ -123,7 +123,7 @@ export default function Checkout() {
               </div>
               {errors.billingState && <p className="invalid-text">{errors.billingState.message}</p>}
               <div className="box-row">
-                <label className="label">Zip Code:</label>
+                <label className="label">ZIP Code:</label>
                 <input type="text" className={`type-box ${errors.billingZipCode  ? 'is-invalid' : ''}`} {...register('billingZipCode')}/>
               </div>
               {errors.billingZipCode && <p className="invalid-text">{errors.billingZipCode.message}</p>}
@@ -156,7 +156,7 @@ export default function Checkout() {
               </div>
               {errors.deliveryState && <p className="invalid-text">{errors.deliveryState.message}</p>}
               <div className="box-row">
-                <label className="label">Zip Code:</label>
+                <label className="label">ZIP Code:</label>
                 <input type="text" className={`type-box ${errors.deliveryZipCode  ? 'is-invalid' : ''}`} {...register('deliveryZipCode')}/>
               </div>
               {errors.deliveryZipCode && <p className="invalid-text">{errors.deliveryZipCode.message}</p>}
